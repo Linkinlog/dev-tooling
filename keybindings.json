@@ -1,0 +1,35 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+shift+alt+p",
+        "command": "projectManager.listProjects"
+    },
+    {
+        "key": "shift+alt+p",
+        "command": "-projectManager.listProjects"
+    },
+    {
+        "key": "shift+alt+p",
+        "command": "git.pushTo"
+    },
+    {
+        "command": "-vscode-neovim.ctrl-b",
+        "key": "ctrl+b"
+    },
+    {
+        "command": "-vscode-neovim.ctrl-d",
+        "key": "ctrl+d"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape2",
+        "key": "k",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "k"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    }
+]
