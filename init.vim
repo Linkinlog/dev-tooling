@@ -10,6 +10,7 @@
 call plug#begin()
 
 Plug 'https://github.com/vim-vdebug/vdebug'
+Plug 'https://github.com/asvetliakov/vim-easymotion'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
