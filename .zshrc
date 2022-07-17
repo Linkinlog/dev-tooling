@@ -70,7 +70,28 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	git
+	aws
+	thefuck
+	lando
+	bgnotify
+	branch
+	brew
+	chucknorris
+	command-not-found
+	docker
+	gulp
+	laravel
+	yum
+	vscode
+	thefuck
+	ssh-agent
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	dnf
+	)
+
 
 source $ZSH/oh-my-zsh.sh
 
