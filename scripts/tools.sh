@@ -79,8 +79,13 @@ if command -v gh &> /dev/null
 then
 	echo "Setting up GitHub..."
 	sleep 1s
+	read -p "Enter github config user.email: " email
+	read -p "Enter github config user.name: " username
+	git config --global user.email "$email"
+	git config --global user.name "$username"
 	gh auth login
 	gh ssh-key add ~/.ssh/github.pub
+	
 fi
 
 # Setup ohmyzsh
@@ -93,5 +98,6 @@ then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	cp $SCRIPT_DIR/../configs/.zshrc ~/.zshrc
+	chsh -s $(which zsh)
 	echo "OhMyZsh installed and configured, run source ~/.zshrc to get changes"
 fi
