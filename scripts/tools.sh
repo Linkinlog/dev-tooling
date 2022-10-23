@@ -13,14 +13,20 @@ esac
 # Start and enable ssh
 if [ $machine == "Linux" ]
 then
+	echo "Starting and enabling ssh..."
+	sleep 1s
 	sudo systemctl start sshd
 	sudo systemctl enable sshd
 fi
 
 # Make directories we need for configs
+echo "Making directories for configs.."
+sleep 1s
 mkdir ~/.config/nvim ~/.ssh 2>/dev/null
 
 # Copy configs to dirs
+echo "Copying configs..."
+sleep 1s
 cp configs/init.vim ~/.config/nvim/
 cp configs/.zshrc ~/.zshrc
 if [ $machine == "Linux" ]
@@ -32,17 +38,23 @@ then
 fi
 
 # Make new ssh key for gh
+echo "Creating ssh key for GitHub..."
+sleep 1s
 ssh-keygen  -f ~/.ssh/github
 
 # Setup Python3 for nvim
 if command -v pip3 &> /dev/null
 then
+	echo "Insalling python neovim..."
+	sleep 1s
 	pip3 install neovim
 fi
 
 # Setup nvim
 if command -v nvim &> /dev/null
 then
+	echo "Setting up nvim..."
+	sleep 1s
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim +'PlugInstall --sync' +qa
 fi
@@ -50,12 +62,16 @@ fi
 # Setup TeamViewer
 if command -v teamviewer &> /dev/null
 then
+	echo "Setting up Teamviewer..."
+	sleep 1s
 	sudo teamviewer setup
 fi
 
 # Setup Github
 if command -v gh &> /dev/null
 then
+	echo "Setting up GitHub..."
+	sleep 1s
 	gh auth login
 	gh ssh-key add ~/.ssh/github.pub
 fi
@@ -63,6 +79,8 @@ fi
 # Setup ohmyzsh
 if command -v zsh &> /dev/null
 then
+	echo "Setting up OhMyZsh"
+	sleep 1s
 	pip install thefuck
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
