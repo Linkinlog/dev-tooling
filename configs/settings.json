@@ -3,25 +3,38 @@
     "python.showStartPage": false,
     "C_Cpp.updateChannel": "Insiders",
     "platformio-ide.autoCloseSerialMonitor": false,
-	"files.associations": { "*.module": "php" },
-    "workbench.iconTheme": "Monokai Pro (Filter Spectrum) Icons",
+	"files.associations": {
+        "*.module": "php",
+        "*.env[^a-z]*": "ini"
+    },
+    "workbench.iconTheme": "vscode-icons",
     "editor.linkedEditing": true,
-    "editor.wordWrap": "on",
-    "explorer.compactFolders": false,
 	"liveServer.settings.donotShowInfoMsg": true,
-    "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+    "workbench.colorTheme": "SynthWave '84",
     "powermode.enabled": true,
-    "vim.statusBarColorControl": true,
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
     "vim.surround": true,
     "vim.useCtrlKeys": false,
     "vim.handleKeys": {
-        "<C-b>": false
+        "<C-b>": false,
+        "<C-a>": false,
+        "<C-f>": false
     },
     "vim.insertModeKeyBindings": [
         {
             "before": [
                 "j",
                 "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "j",
+                "k"
             ],
             "after": [
                 "<Esc>"
@@ -96,7 +109,9 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "cSpell.userWords": [
-        "Dahlton"
+        "autoconfirm",
+        "Dahlton",
+        "Samcart"
     ],
     "prettier.trailingComma": "all",
     "editor.formatOnType": true,
@@ -106,7 +121,8 @@
         "vagrant": "linux",
         "web01": "linux",
         "piberry": "linux",
-        "testing": "linux"
+        "testing": "linux",
+        "dev": "linux"
     },
 	"window.menuBarVisibility": "compact",
 	"editor.minimap.enabled": false,
@@ -114,7 +130,6 @@
 	"bladeFormatter.format.useTabs": true,
     "bladeFormatter.format.indentSize": 1,
     "liveServer.settings.donotVerifyTags": true,
-    "editor.wordWrapColumn": 100,
     "bracket-pair-colorizer-2.depreciation-notice": false,
     "git.fetchOnPull": true,
     "git.rebaseWhenSync": true,
@@ -255,15 +270,16 @@
         "peekViewTitleLabel.foreground": "#32CD32",
         "tab.activeBorder": "#32CD32",
         "statusBar.border": "#32CD32",
-        "statusBar.background": "#673AB7",
-        "statusBar.noFolderBackground": "#673AB7",
-        "statusBar.debuggingBackground": "#673AB7",
+        "statusBar.background": "#5f00af",
+        "statusBar.noFolderBackground": "#5f00af",
+        "statusBar.debuggingBackground": "#5f00af",
         "statusBar.foreground": "#b78f3a"
-        
     },
     "vscode-neovim.textDecorationsAtTop": true,
     "settingsSync.ignoredSettings": [
-        "gitlens.currentLine.enabled"
+        "gitlens.currentLine.enabled",
+        "vscode-neovim.neovimInitVimPaths.linux",
+        "php.executablePath"
     ],
     "editor.bracketPairColorization.enabled": true,
     "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
@@ -275,7 +291,6 @@
     "workbench.editor.restoreViewState": false,
     "telemetry.telemetryLevel": "off",
     "tab-groups.gitBranchGroups": "Nothing",
-    "diffEditor.renderSideBySide": false,
     "git.confirmSync": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "php-docblocker.alignParams": true,
@@ -292,5 +307,54 @@
     "intelephense.diagnostics.undefinedTypes": false,
     "intelephense.diagnostics.undefinedMethods": false,
     "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
+    "window.titleBarStyle": "custom",
+    "eslint.probe": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "markdown"
+    ],
+    "vetur.validation.templateProps": true,
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "editor.largeFileOptimizations": false,
+    "workbench.editor.enablePreview": false,
+    "rpc.detailsEditing": "On {git_branch} {problems}",
+    "rpc.detailsIdling": "Asleep on keyboard",
+    "rpc.detailsViewing": "On {git_branch} {problems}",
+    "rpc.largeImage": "Slaugthering a {LANG} file",
+    "rpc.largeImageIdling": "Please wake me up",
+    "rpc.lowerDetailsIdling": "Zzz",
+    "rpc.lowerDetailsEditing": "Destroying {file_name}:{current_line}:{current_column}",
+    "rpc.lowerDetailsDebugging": "BugSmashin on {file_name}:{current_line}:{current_column}",
+    "rpc.detailsDebugging": "On {git_branch}",
+    "gitlens.views.branches.branches.layout": "list",
+    "emmet.excludeLanguages": [
+        "markdown",
+        "php"
+    ],
+    "vim.camelCaseMotion.enable": true,
+    "vim.gdefault": true,
+    "vim.highlightedyank.enable": true,
+    "vim.replaceWithRegister": true,
+    "vim.sneak": true,
+    "vim.sneakReplacesF": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.mac": "/Users/dseyler/.vs-kubernetes/tools/minikube/darwin-arm64/minikube",
+        "vscode-kubernetes.helm-path.mac": "/Users/dseyler/.vs-kubernetes/tools/helm/darwin-arm64/helm"
+    },
+    "redhat.telemetry.enabled": true,
+    "go.toolsManagement.autoUpdate": true,
+    "editor.detectIndentation": false,
+    "editor.renderFinalNewline": false,
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "on",
+    "javascript.format.enable": false,
+    "typescript.validate.enable": false,
+    "window.zoomLevel": 1,
 
 }
