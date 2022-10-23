@@ -1,1 +1,1 @@
-code python3-pip neovim docker wget gh zsh fortune-mod util-linux-user
+code python3-pip neovim docker wget gh zsh fortune-mod util-linux-user thefuck

@@ -17,5 +17,5 @@ sudo dnf -y install $(cat scripts/linux_packages.txt)
 echo "Installing TeamViewer...."
 sleep 1s
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-sudo dnf install ./teamviewer.x86_64.rpm
+sudo dnf -y install ./teamviewer.x86_64.rpm
 rm teamviewer.x86_64.*

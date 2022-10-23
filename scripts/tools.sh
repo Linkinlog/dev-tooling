@@ -67,7 +67,9 @@ then
 fi
 
 # Setup TeamViewer
-if command -v teamviewer &> /dev/null
+read -p "Set up TeamViewer (y/n)? " tvsetup
+
+if [ $tvsetup == "y" ] && command -v teamviewer &> /dev/null
 then
 	echo "Setting up Teamviewer..."
 	sleep 1s
@@ -75,14 +77,19 @@ then
 fi
 
 # Setup Github
-if command -v gh &> /dev/null
+read -p "Set up GitHub (y/n)? " ghsetup
+
+if [ $ghsetup == "y" ] && command -v gh &> /dev/null
 then
 	echo "Setting up GitHub..."
 	sleep 1s
 	read -p "Enter github config user.email: " email
 	read -p "Enter github config user.name: " username
-	git config --global user.email "$email"
-	git config --global user.name "$username"
+	if [ ! -z "$email" ] && [ ! -z "$username" ]
+	then
+		git config --global user.email "$email"
+		git config --global user.name "$username"
+	fi
 	gh auth login
 	gh ssh-key add ~/.ssh/github.pub
 	
@@ -93,11 +100,11 @@ if command -v zsh &> /dev/null
 then
 	echo "Setting up OhMyZsh"
 	sleep 1s
+	export RUNZSH=no
+	export KEEP_ZSHRC=yes
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	pip install thefuck
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	cp $SCRIPT_DIR/../configs/.zshrc ~/.zshrc
-	chsh -s $(which zsh)
-	echo "OhMyZsh installed and configured, run source ~/.zshrc to get changes"
+	echo "OhMyZsh installed and configured, run zsh now"
 fi
