@@ -1,0 +1,1 @@
+code neovim docker wget gh zsh
