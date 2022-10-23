@@ -10,6 +10,13 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 
+# Set hostname
+read -p "Enter desired hostname: " hostname
+if [ ! -z "$hostname" ]
+then
+	sudo su -c "echo '$hostname' > /etc/hostname"
+fi
+
 # Start and enable ssh
 if [ $machine == "Linux" ]
 then
@@ -81,8 +88,10 @@ if command -v zsh &> /dev/null
 then
 	echo "Setting up OhMyZsh"
 	sleep 1s
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	pip install thefuck
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	cp $SCRIPT_DIR/../configs/.zshrc ~/.zshrc
+	echo "OhMyZsh installed and configured, run source ~/.zshrc to get changes"
 fi
