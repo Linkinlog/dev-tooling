@@ -1,1 +1,1 @@
-code neovim docker wget gh zsh
+code python3-pip neovim docker wget gh zsh

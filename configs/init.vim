@@ -41,7 +41,7 @@ Plug 'https://github.com/asvetliakov/vim-easymotion'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ray-x/go.nvim'
-Plug 'ray-x/guihua.lua' ; recommanded if need floating window support
+Plug 'ray-x/guihua.lua'
 
 call plug#end()
 
