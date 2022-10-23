@@ -7,7 +7,7 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 
 # Install packages
 dnf check-update
-sudo dnf -y install $(cat scripts/packages.txt)
+sudo dnf -y install $(cat scripts/linux_packages.txt)
 
 # Install teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm

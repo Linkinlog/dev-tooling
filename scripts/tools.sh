@@ -1,22 +1,35 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine="Linux";;
+    Darwin*)    machine="Mac";;
+    CYGWIN*)    machine="Cygwin";;
+    MINGW*)     machine="MinGw";;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
 
-sudo systemctl start sshd
-sudo systemctl enable sshd
+# Start and enable ssh
+if [ $machine == "Linux" ]
+then
+	sudo systemctl start sshd
+	sudo systemctl enable sshd
+fi
 
 # Make directories we need for configs
-mkdir ~/.config/nvim ~/.vscode ~/.ssh 2>/dev/null
+mkdir ~/.config/nvim ~/.ssh 2>/dev/null
 
 # Copy configs to dirs
 cp configs/init.vim ~/.config/nvim/
 cp configs/.zshrc ~/.zshrc
-cp configs/keybindings.json configs/settings.json ~/.vscode
-
-# Add Coding share -- Comment out if not needed
-sudo mkdir /media/Coding 2>/dev/null
-grep -q '/media/Coding' /etc/fstab ||
-sudo su -c "printf '//192.168.0.11/Coding  /media/Coding/  cifs   credentials=$SCRIPT_DIR/../configs/creds,uid=1000,gid=1000,iocharset=utf8,vers=2.0  0  0' >> /etc/fstab"
+if [ $machine == "Linux" ]
+then
+	mkdir -p ~/.config/Code/User/ && cp configs/keybindings.json configs/settings.json ~/.config/Code/User/
+elif [ $machine == "Mac" ]
+then
+	mkdir -p ~/Library/Application\ Support/Code/User/ && cp configs/keybindings.json configs/settings.json ~/Library/Application\ Support/Code/User/
+fi
 
 # Make new ssh key for gh
 ssh-keygen  -f ~/.ssh/github
@@ -50,7 +63,6 @@ fi
 # Setup ohmyzsh
 if command -v zsh &> /dev/null
 then
-	dnf -y install fortune-mod
 	pip install thefuck
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
