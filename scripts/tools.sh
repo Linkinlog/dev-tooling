@@ -36,6 +36,8 @@ echo "Copying configs..."
 sleep 1s
 cp configs/init.vim ~/.config/nvim/
 cp configs/.zshrc ~/.zshrc
+cp configs/ssh_config ~/.ssh/config
+
 if [ $machine == "Linux" ]
 then
 	mkdir -p ~/.config/Code/User/ && cp configs/keybindings.json configs/settings.json ~/.config/Code/User/
