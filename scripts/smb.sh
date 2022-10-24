@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 # Add Coding share -- Comment out if not needed
 sudo mkdir /media/Coding 2>/dev/null
 grep -q '/media/Coding' /etc/fstab ||
