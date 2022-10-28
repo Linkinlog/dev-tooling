@@ -1,3 +1,4 @@
+:set clipboard=unnamed
 :set number
 :set relativenumber
 :set autoindent
@@ -9,70 +10,9 @@
 :set cpo-=<
 
 
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_working_path_mode = 'ra'
 
-" Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_winsize = 20
-
-function! OpenToRight()
-  :normal v
-  let g:path=expand('%:p')
-  :q!
-  execute 'belowright vnew' g:path
-  :normal <C-l>
-endfunction
-
-function! OpenBelow()
-  :normal v
-  let g:path=expand('%:p')
-  :q!
-  execute 'belowright new' g:path
-  :normal <C-l>
-endfunction
-
-
-function! NetrwMappings()
-    " Hack fix to make ctrl-l work properly
-    noremap <buffer> <C-l> <C-w>l
-    noremap <silent> <C-f> :call ToggleNetrw()<CR>
-    noremap <buffer> V :call OpenToRight()<cr>
-    noremap <buffer> H :call OpenBelow()<cr>
-endfunction
-
-augroup netrw_mappings
-    autocmd!
-    autocmd filetype netrw call NetrwMappings()
-augroup END
-
-" Allow for netrw to be toggled
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
-endfunction
-
-" Close Netrw if it's the only buffer open
-autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
-" Make netrw act like a project Draw
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :call ToggleNetrw()
-augroup END
-
-let g:NetrwIsOpen=0
 
 " Copy to system clipboard
 vnoremap <leader>y  "+y
@@ -100,6 +40,48 @@ inoremap jK <esc>
 inoremap Jk <esc>
 inoremap JK <esc>
 
+" Move to previous/next
+nnoremap <silent>    <C-,> <Cmd>BufferPrevious<CR>
+nnoremap <silent>    <C-.> <Cmd>BufferNext<CR>
+" Re-order to previous/next
+nnoremap <silent>    <C-<> <Cmd>BufferMovePrevious<CR>
+nnoremap <silent>    <C->> <Cmd>BufferMoveNext<CR>
+" Goto buffer in position...
+nnoremap <silent>    <C-1> <Cmd>BufferGoto 1<CR>
+nnoremap <silent>    <C-2> <Cmd>BufferGoto 2<CR>
+nnoremap <silent>    <C-3> <Cmd>BufferGoto 3<CR>
+nnoremap <silent>    <C-4> <Cmd>BufferGoto 4<CR>
+nnoremap <silent>    <C-5> <Cmd>BufferGoto 5<CR>
+nnoremap <silent>    <C-6> <Cmd>BufferGoto 6<CR>
+nnoremap <silent>    <C-7> <Cmd>BufferGoto 7<CR>
+nnoremap <silent>    <C-8> <Cmd>BufferGoto 8<CR>
+nnoremap <silent>    <C-9> <Cmd>BufferGoto 9<CR>
+nnoremap <silent>    <C-0> <Cmd>BufferLast<CR>
+" Close buffer
+nnoremap <silent>    <C-w> <Cmd>BufferClose<CR>
+" Wipeout buffer
+"                          :BufferWipeout
+" Close commands
+"                          :BufferCloseAllButCurrent
+"                          :BufferCloseAllButVisible
+"                          :BufferCloseAllButPinned
+"                          :BufferCloseAllButCurrentOrPinned
+"                          :BufferCloseBuffersLeft
+"                          :BufferCloseBuffersRight
+" Sort automatically by...
+nnoremap <silent> <Space>bb <Cmd>BufferOrderByBufferNumber<CR>
+nnoremap <silent> <Space>bd <Cmd>BufferOrderByDirectory<CR>
+nnoremap <silent> <Space>bl <Cmd>BufferOrderByLanguage<CR>
+nnoremap <silent> <Space>bw <Cmd>BufferOrderByWindowNumber<CR>
+
+nnoremap <silent> <C-e> <Cmd>NvimTreeToggle<CR>
+nnoremap <silent> <C-p> <Cmd>Files<Cr>
+nnoremap <silent> <C-f> <Cmd>Rg<Cr>
+
+" Other:
+" :BarbarEnable - enables barbar (enabled by default)
+" :BarbarDisable - very bad command, should never be used
+
 call plug#begin()
 
 Plug 'andweeb/presence.nvim'
@@ -110,12 +92,14 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasiser/vim-code-dark'
+Plug 'romgrk/barbar.nvim'
 " Center text
 Plug 'junegunn/goyo.vim'
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Fuzzy find files
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " This objectively makes vim better
 Plug 'terryma/vim-multiple-cursors'
 " Working with tags
@@ -131,5 +115,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Dev Dock integration
 Plug 'romainl/vim-devdocs'
+" Nvim-tree
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 
 call plug#end()
+lua require('nvimtree')
