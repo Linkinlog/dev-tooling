@@ -15,15 +15,18 @@ import (
 // ProcessCommand will start everything,
 // handling the flags/args and processing.
 func ProcessCommand() error {
-	systemPtr := flag.String("system", "linux", "The target OS")
-	if os.Args[0] == "init" {
+	systemPtr := flag.String("system", "", "The target OS")
+	flag.Parse()
+	if len(os.Args) > 1 && os.Args[1] == "init" {
 		return initTool()
-	} else {
+	} else if *systemPtr != "" {
 		var system, err = osHandler.StringToSystem(*systemPtr)
 		if err != nil {
 			return err
 		}
 		return startPipeline(system)
+	} else {
+		return errors.New("Invalid use of tool, please check `-h`")
 	}
 }
 
@@ -38,13 +41,12 @@ func initTool() error {
 	if err != nil {
 		return err
 	}
-	startPipeline(system)
-	return nil
+	return startPipeline(system)
 }
 
 // startPipeline will take a look at what arguments were passed in
 // and then begin setting up shop, starting with installing pacakages.
 func startPipeline(system osHandler.System) error {
 	// Pass along to installer service.
-	return errors.New("WIP")
+	return errors.New("TODO")
 }
